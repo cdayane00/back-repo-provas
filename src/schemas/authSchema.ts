@@ -11,29 +11,3 @@ const authSchema = joi.object({
 }).options({allowUnknown: true});
 
 export {authSchema};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

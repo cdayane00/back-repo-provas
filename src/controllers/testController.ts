@@ -7,3 +7,19 @@ export const insert = async (req: Request, res: Response) => {
     const test = await testService.insert(testData);
     res.status(201).send(test);
 }
+
+export const find = async (req: Request, res: Response) => {
+	const { groupBy, teacher, discipline } = req.query as {
+		groupBy: string;
+		teacher: string;
+		discipline: string;
+	};
+    
+	if (groupBy !== 'disciplines' && groupBy !== 'teachers') {
+        console.log(groupBy);
+		return res.status(400).send({ error: 'Invalid groupBy parameter' });
+	}
+    
+	const tests = await testService.find({ groupBy, teacher, discipline });
+	res.status(200).send({ tests });
+};

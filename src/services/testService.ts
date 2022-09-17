@@ -1,6 +1,6 @@
 import * as testRepository from '../repositories/testRepositoy';
 import * as teacherAndDisciplineRepository from '../repositories/teacherAndDisciplineRepository';
-import { CreateTestData } from '../types/testInterface';
+import { CreateTestData, Filter } from '../types/testInterface';
 import appError from '../config/error';
 import * as categoryRepository from '../repositories/categoryRepository';
 import * as disciplineRepository from '../repositories/disciplineRepository';
@@ -69,4 +69,11 @@ export const insert = async (createTestData: CreateTestData) => {
     });
     return {id,name,pdfUrl};
 };
-    
+
+export const find = async (filter: Filter) => {
+	if (filter.groupBy === 'disciplines') {
+		return testRepository.getTestsByDiscipline(filter.discipline);
+	} else if (filter.groupBy === 'teachers') {
+		return testRepository.getTestsByTeachers(filter.teacher);
+	}
+};

@@ -8,5 +8,6 @@ const testRouter = Router();
 
 testRouter.use(validateBearerToken);
 testRouter.post('/test',validateSchemaMiddleware(testSchema),testController.insert);
+testRouter.get('/tests', testController.find);
 
 export default testRouter;

@@ -2,11 +2,14 @@ import * as testRepository from '../repositories/testRepositoy';
 import * as teacherAndDisciplineRepository from '../repositories/teacherAndDisciplineRepository';
 import { CreateTestData } from '../types/testInterface';
 import appError from '../config/error';
+import * as categoryRepository from '../repositories/categoryRepository';
+import * as disciplineRepository from '../repositories/disciplineRepository';
+import * as teacherRepository from '../repositories/teacherRepository';
 
 const ensureElegibilityToCreateTest = async (createTestData: CreateTestData) =>{
     const {category, discipline, teacher} = createTestData;
     
-    const existingCategory = await testRepository.findByNameCategory(category, 'Category');
+    const existingCategory = await categoryRepository.findByNameCategory(category, 'Category');
     if(!existingCategory){
         throw new appError(
 			'Category not found',
@@ -16,7 +19,7 @@ const ensureElegibilityToCreateTest = async (createTestData: CreateTestData) =>{
 		);
     }
 
-    const existingTeacher = await testRepository.findByNameTeacher(teacher,'Teacher');
+    const existingTeacher = await teacherRepository.findByNameTeacher(teacher,'Teacher');
     if(!existingTeacher){
         throw new appError(
 			'Teacher not found',
@@ -26,7 +29,7 @@ const ensureElegibilityToCreateTest = async (createTestData: CreateTestData) =>{
 		);
     }
 
-    const existingDiscipline = await testRepository.findByNameDiscipline(discipline,'Discipline');
+    const existingDiscipline = await disciplineRepository.findByNameDiscipline(discipline,'Discipline');
     if(!existingDiscipline){
         throw new appError(
 			'Discipline not found',

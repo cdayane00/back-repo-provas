@@ -128,13 +128,13 @@ const main = async () => {
 			name: 'Recuperação Cálculo 2',
 			pdfUrl: faker.internet.url(),
 			categoryId: 1,
-			teacherDisciplineId: 5,
+			teacherDisciplineId: 4,
 		},
         {
 			name: 'Prova Álgebra 1',
 			pdfUrl: faker.internet.url(),
 			categoryId: 3,
-			teacherDisciplineId: 4,
+			teacherDisciplineId: 5,
 		},
     ];
 

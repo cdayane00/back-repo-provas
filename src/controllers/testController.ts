@@ -16,7 +16,6 @@ export const find = async (req: Request, res: Response) => {
 	};
     
 	if (groupBy !== 'disciplines' && groupBy !== 'teachers') {
-        console.log(groupBy);
 		return res.status(400).send({ error: 'Invalid groupBy parameter' });
 	}
     

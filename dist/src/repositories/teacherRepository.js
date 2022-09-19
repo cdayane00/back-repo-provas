@@ -14,8 +14,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.findByNameTeacher = void 0;
 const database_1 = __importDefault(require("../config/database"));
-const findByNameTeacher = (nameF, test) => __awaiter(void 0, void 0, void 0, function* () {
-    return database_1.default.teacher.findUnique({
+const findByNameTeacher = (nameF) => __awaiter(void 0, void 0, void 0, function* () {
+    return database_1.default.teacher.findFirst({
         where: {
             name: nameF
         },

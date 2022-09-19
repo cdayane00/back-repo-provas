@@ -1,7 +1,7 @@
 import prisma from '../config/database';
 
-export const findByNameTeacher = async (nameF: string, test: String) => {
-	return prisma.teacher.findUnique({
+export const findByNameTeacher = async (nameF: string) => {
+	return prisma.teacher.findFirst({
 		where: {
 			name: nameF
 		},

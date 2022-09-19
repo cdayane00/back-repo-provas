@@ -44,13 +44,15 @@ const disciplineRepository = __importStar(require("../repositories/disciplineRep
 const teacherRepository = __importStar(require("../repositories/teacherRepository"));
 const ensureElegibilityToCreateTest = (createTestData) => __awaiter(void 0, void 0, void 0, function* () {
     const { category, discipline, teacher } = createTestData;
+    const existingTeacher = yield teacherRepository.findByNameTeacher(teacher);
+    if (!existingTeacher) {
+        console.log('erro teacher');
+        throw new error_1.default('Teacher not found', 404, 'Teacher not found', 'Ensure teacher exists');
+    }
     const existingCategory = yield categoryRepository.findByNameCategory(category, 'Category');
     if (!existingCategory) {
+        console.log('erro category');
         throw new error_1.default('Category not found', 404, 'Category not found', 'Ensure category exists');
-    }
-    const existingTeacher = yield teacherRepository.findByNameTeacher(teacher, 'Teacher');
-    if (!existingTeacher) {
-        throw new error_1.default('Teacher not found', 404, 'Teacher not found', 'Ensure teacher exists');
     }
     const existingDiscipline = yield disciplineRepository.findByNameDiscipline(discipline, 'Discipline');
     if (!existingDiscipline) {

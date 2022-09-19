@@ -8,9 +8,21 @@ import * as teacherRepository from '../repositories/teacherRepository';
 
 const ensureElegibilityToCreateTest = async (createTestData: CreateTestData) =>{
     const {category, discipline, teacher} = createTestData;
+
+    const existingTeacher = await teacherRepository.findByNameTeacher(teacher);
+    if(!existingTeacher){
+        console.log('erro teacher')
+        throw new appError(
+			'Teacher not found',
+			404,
+			'Teacher not found',
+			'Ensure teacher exists'
+		);
+    }
     
     const existingCategory = await categoryRepository.findByNameCategory(category, 'Category');
     if(!existingCategory){
+        console.log('erro category')
         throw new appError(
 			'Category not found',
 			404,
@@ -19,15 +31,7 @@ const ensureElegibilityToCreateTest = async (createTestData: CreateTestData) =>{
 		);
     }
 
-    const existingTeacher = await teacherRepository.findByNameTeacher(teacher,'Teacher');
-    if(!existingTeacher){
-        throw new appError(
-			'Teacher not found',
-			404,
-			'Teacher not found',
-			'Ensure teacher exists'
-		);
-    }
+    
 
     const existingDiscipline = await disciplineRepository.findByNameDiscipline(discipline,'Discipline');
     if(!existingDiscipline){
